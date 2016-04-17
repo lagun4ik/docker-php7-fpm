@@ -3,9 +3,9 @@ FROM phusion/baseimage
 MAINTAINER ivan@lagunovsky.com
 
 ENV PHP_INI_DIR /etc/php/7.0/fpm/
-ENV PHP_VERSION 7.0.3
-ENV PHP_FILENAME php-7.0.3.tar.xz
-ENV PHP_SHA256 3af2b62617a0e46214500fc3e7f4a421067224913070844d3665d6cc925a1cca
+ENV PHP_VERSION 7.0.5
+ENV PHP_FILENAME php-7.0.5.tar.xz
+ENV PHP_SHA256 c41f1a03c24119c0dd9b741cdb67880486e64349fc33527767f6dc28d3803abb
 ENV PHP_USER root
 ENV PHP_AUTOCONF /usr/bin/autoconf
 ENV PHP_INI_TYPE production
@@ -102,9 +102,9 @@ RUN cd /usr/src/php && ./configure \
 COPY scripts/docker-php-ext-* /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-php-ext-*
 
-ENV PHP_AMQP_BUILD_DEPS libtool automake git pkg-config librabbitmq-dev libzmq-dev
+ENV PHP_AMQP_BUILD_DEPS libtool automake pkg-config librabbitmq-dev libzmq-dev
 
-RUN apt-get update && apt-get install -y $PHP_AMQP_BUILD_DEPS --no-install-recommends && rm -r /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y git $PHP_AMQP_BUILD_DEPS --no-install-recommends && rm -r /var/lib/apt/lists/*
 
 #Must be keep
 RUN apt-get update && apt-get install -y libmagickwand-dev libvips-dev libgsf-1-dev libmagickcore-dev libevent-dev --no-install-recommends && rm -r /var/lib/apt/lists/*
