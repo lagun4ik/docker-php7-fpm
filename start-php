@@ -1,6 +1,0 @@
-#!/bin/sh
-
-rm -rf "$PHP_INI_DIR"php.ini
-ln -sf "$PHP_INI_DIR"php.ini-$PHP_INI_TYPE $PHP_INI_DIR/php.ini
-
-service php7.0-fpm restart

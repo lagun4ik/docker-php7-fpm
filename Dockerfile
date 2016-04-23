@@ -1,4 +1,4 @@
-FROM phusion/baseimage
+FROM debian:jessie
 
 MAINTAINER ivan@lagunovsky.com
 
@@ -102,11 +102,10 @@ RUN cd /usr/src/php && ./configure \
 COPY scripts/docker-php-ext-* /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-php-ext-*
 
-ENV PHP_AMQP_BUILD_DEPS libtool automake pkg-config librabbitmq-dev libzmq-dev
+ENV PHP_AMQP_BUILD_DEPS libtool automake pkg-config libzmq-dev
 
 RUN apt-get update && apt-get install -y git $PHP_AMQP_BUILD_DEPS --no-install-recommends && rm -r /var/lib/apt/lists/*
 
-#Must be keep
 RUN apt-get update && apt-get install -y libmagickwand-dev libvips-dev libgsf-1-dev libmagickcore-dev libevent-dev --no-install-recommends && rm -r /var/lib/apt/lists/*
 
 # MONGO
@@ -144,39 +143,50 @@ RUN docker-php-ext-install-pecl zip
 RUN php -m | grep zip
 RUN docker-php-ext-enable opcache
 
-#CLEAN
-RUN apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false $buildDeps $PHP_AMQP_BUILD_DEPS
-RUN apt-get clean all
-RUN rm -Rf /usr/lib/rabbitmq-c
+RUN apt-get update && apt-get install git openssh-client curl -y --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
-# Create php.ini
-RUN curl https://raw.githubusercontent.com/php/php-src/PHP-$PHP_VERSION/php.ini-development -o $PHP_INI_DIR/php.ini-development \
-    && curl https://raw.githubusercontent.com/php/php-src/PHP-$PHP_VERSION/php.ini-production -o $PHP_INI_DIR/php.ini-production
+RUN set -ex \
+	&& cd /usr/local/etc \
+	&& if [ -d php-fpm.d ]; then \
+		# for some reason, upstream's php-fpm.conf.default has "include=NONE/etc/php-fpm.d/*.conf"
+		sed 's!=NONE/!=!g' php-fpm.conf.default | tee php-fpm.conf > /dev/null; \
+		cp php-fpm.d/www.conf.default php-fpm.d/www.conf; \
+	else \
+		# PHP 5.x don't use "include=" by default, so we'll create our own simple config that mimics PHP 7+ for consistency
+		mkdir php-fpm.d; \
+		cp php-fpm.conf.default php-fpm.d/www.conf; \
+		{ \
+			echo '[global]'; \
+			echo 'include=etc/php-fpm.d/*.conf'; \
+		} | tee php-fpm.conf; \
+	fi \
+	&& { \
+		echo '[global]'; \
+		echo 'error_log = /proc/self/fd/2'; \
+		echo; \
+		echo '[www]'; \
+		echo '; if we send this to /proc/self/fd/1, it never appears'; \
+		echo 'access.log = /proc/self/fd/2'; \
+		echo; \
+		echo 'clear_env = no'; \
+		echo; \
+		echo '; Ensure worker stdout and stderr are sent to the main error log.'; \
+		echo 'catch_workers_output = yes'; \
+	} | tee php-fpm.d/docker.conf \
+	&& { \
+		echo '[global]'; \
+		echo 'daemonize = no'; \
+		echo; \
+		echo '[www]'; \
+		echo 'listen = [::]:9000'; \
+	} | tee php-fpm.d/zz-docker.conf
 
-RUN echo error_log = /dev/stderr >> $PHP_INI_DIR/php.ini-development
-
-ADD config/php-fpm.conf $PHP_INI_DIR/php-fpm.conf
-ADD config/www.conf $PHP_INI_DIR/pool.d/www.conf
-
-ADD scripts/php7.0-fpm /etc/init.d/php7.0-fpm
-RUN chmod +x /etc/init.d/php7.0-fpm \
-    && update-rc.d php7.0-fpm defaults
-
-RUN ln -s /usr/local/sbin/php-fpm /usr/sbin/php-fpm7.0
-
-ADD scripts/php7.0-fpm-checkconf /usr/lib/php/php7.0-fpm-checkconf
-RUN chmod +x /usr/lib/php/php7.0-fpm-checkconf
-
-ADD config/php7.0-fpm.service /lib/systemd/system/php7.0-fpm.service
-
-RUN mkdir /run/php/
+RUN apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false $buildDeps $PHP_AMQP_BUILD_DEPS && apt-get clean all
 
 RUN curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 
-# forward request and error logs to docker log collector
-RUN ln -sf /dev/stderr /var/log/php7.0-fpm.log
-
-ADD start-php /etc/my_init.d/start-php.sh
-RUN chmod +x /etc/my_init.d/start-php.sh
+RUN mkdir -p /var/www/
+WORKDIR /var/www/
 
 EXPOSE 9000
+CMD ["php-fpm", "-R"]
