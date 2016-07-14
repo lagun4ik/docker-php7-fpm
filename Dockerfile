@@ -44,7 +44,8 @@ RUN apk add --no-cache --virtual .persistent-deps \
 		ca-certificates \
 		curl \
     git \
-    bash
+    bash \
+    libmemcached
 
 RUN mkdir -p $PHP_INI_DIR/conf.d \
  && set -xe \
