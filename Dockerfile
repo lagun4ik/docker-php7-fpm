@@ -38,14 +38,15 @@ ENV PHPIZE_DEPS \
     libmemcached-dev
 ENV ENV PHP_INI_DIR /etc/php/7.0/fpm/
 
-COPY scripts/docker-php-ext-* /usr/local/bin/
-
 RUN apk add --no-cache --virtual .persistent-deps \
 		ca-certificates \
 		curl \
     git \
     bash \
     libmemcached
+
+COPY scripts/docker-php-ext-* /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-php-ext-*
 
 RUN mkdir -p $PHP_INI_DIR/conf.d \
  && set -xe \
@@ -154,10 +155,11 @@ RUN mkdir -p $PHP_INI_DIR/conf.d \
     && make install \
     && touch $PHP_INI_DIR/conf.d/ext-redis.ini \
     && echo 'extension=memcached.so' >> $PHP_INI_DIR/conf.d/ext-redis.ini \
-  && chmod +x /usr/local/bin/docker-php-ext-* \
-  && docker-php-ext-install-pecl zip && docker-php-ext-enable opcache \
-  && apk del .build-deps \
-  && set -ex \
+  && docker-php-ext-install-pecl zip \
+  && docker-php-ext-enable opcache \
+  && apk del .build-deps
+
+RUN set -ex \
 	&& cd /usr/local/etc \
 	&& if [ -d php-fpm.d ]; then \
 		# for some reason, upstream's php-fpm.conf.default has "include=NONE/etc/php-fpm.d/*.conf"
@@ -191,8 +193,9 @@ RUN mkdir -p $PHP_INI_DIR/conf.d \
 		echo; \
 		echo '[www]'; \
 		echo 'listen = [::]:9000'; \
-	} | tee php-fpm.d/zz-docker.conf \
-  && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+	} | tee php-fpm.d/zz-docker.conf
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN mkdir -p /var/www/
 WORKDIR /var/www/
