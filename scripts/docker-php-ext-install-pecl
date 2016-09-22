@@ -11,19 +11,7 @@ if [ $# -eq 0 ]; then
   exit 1
 fi
 
-if $1 == "big_int"; then
-    mkdir -p /tmp/temp__$1
-    cd /tmp/temp__$1
-    wget https://pecl.php.net/get/big_int-1.0.7.tgz
-    tar zxf big_int-1.0.7.tgz
-    cd big_int-1.0.7
-    phpize
-    ./configure
-    make
-    make install
-else
-    pecl install "$@"
-fi
+pecl install "$@"
 
 while [ $# -gt 0 ]; do
   ext="$1"

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+env | sed "s/\(.*\)=\(.*\)/env[\1]='\2'/" > /usr/local/etc/conf.d/env.conf
+
+php-fpm
