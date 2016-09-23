@@ -20,11 +20,6 @@ ENV PHP_MEMORY_LIMIT=256M \
    PHP_XDEBUG_REMOTE_MODE=req \
    PHP_XDEBUG_IDEKEY="PHPSTORM"
 
-# ensure www-data user exists
-RUN set -x \
-	&& addgroup -g 82 -S www-data \
-	&& adduser -u 82 -D -S -G www-data www-data
-
 COPY scripts/docker-php-ext-* /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-php-ext-*
 
@@ -58,6 +53,7 @@ RUN	echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
 		php7-gettext \
 		php7-xmlreader \
 		php7-xmlrpc \
+		php7-xml \
 		php7-bz2 \
 		php7-iconv \
 		php7-pdo_dblib \
@@ -69,6 +65,7 @@ RUN	echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
 		php7-amqp \
 		php7-pcntl \
 		php7-opcache \
+		php7-mbstring \
 		php7-fpm \
 		php7 && \
 	rm -rf /etc/php7/php.ini && \
@@ -80,4 +77,4 @@ WORKDIR /www
 VOLUME ["/www"]
 
 EXPOSE 9000
-CMD ["/usr/sbin/php-fpm7"]
+CMD ["/usr/sbin/php-fpm7", "-R"]
