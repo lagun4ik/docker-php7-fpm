@@ -69,12 +69,16 @@ RUN	echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
 		php7-fpm \
 		php7 && \
 	rm -rf /etc/php7/php.ini && \
-    ln -s /usr/bin/php7 /usr/bin/php
+    ln -s /usr/bin/php7 /usr/bin/php \
+    sed -i "s|;*daemonize\s*=\s*yes|daemonize = no|g" /etc/php7/php-fpm.conf && \
+    sed -i "s|;*listen\s*=\s*127.0.0.1:9000|listen = 9000|g" /etc/php7/php-fpm.d/www.conf && \
+    sed -i "s|;*listen\s*=\s*/||g" /etc/php7/php-fpm.d/www.conf && \
+    mkdir /var/www
 
 COPY ./conf/php.ini /etc/php7/php.ini
 
-WORKDIR /www
-VOLUME ["/www"]
+WORKDIR /var/www
+VOLUME ["/var/www"]
 
 EXPOSE 9000
 CMD ["/usr/sbin/php-fpm7", "-R"]
