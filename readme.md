@@ -58,6 +58,7 @@ json
 libxml
 mbstring
 mcrypt
+memcached
 mongodb
 mysqli
 odbc

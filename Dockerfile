@@ -20,12 +20,8 @@ ENV PHP_MEMORY_LIMIT=256M \
    PHP_XDEBUG_REMOTE_MODE=req \
    PHP_XDEBUG_IDEKEY="PHPSTORM"
 
-COPY scripts/docker-php-ext-* /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-php-ext-*
-
-RUN apk upgrade --update --no-cache
-
-RUN apk add --update --no-cache \
+RUN apk upgrade --update --no-cache && \
+    apk add --update --no-cache \
 	ca-certificates \
 	curl \
     bash
@@ -74,6 +70,18 @@ RUN	echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
     sed -i "s|;*listen\s*=\s*127.0.0.1:9000|listen = 9000|g" /etc/php7/php-fpm.d/www.conf && \
     sed -i "s|;*listen\s*=\s*/||g" /etc/php7/php-fpm.d/www.conf && \
     mkdir /var/www
+
+RUN apk add --update --no-cache --virtual .build-deps git file re2c autoconf make g++ php7-dev libmemcached-dev cyrus-sasl-dev && \
+    cd /tmp && git clone --depth=1 -b php7 https://github.com/php-memcached-dev/php-memcached.git && \
+    cd /tmp/php-memcached && \
+    phpize7 && \
+    ./configure --disable-memcached-sasl --with-php-config=php-config7 && \
+    make && make install && \
+    mv /tmp/php-memcached/modules/memcached.so /usr/lib/php7/modules && \
+    rm -rf /tmp/php-memcached/ && \
+    echo 'extension=memcached.so' >> /etc/php7/conf.d/memcached.ini && \
+    apk del .build-deps && \
+    apk add --update --na-cache libmemcached
 
 COPY ./conf/php.ini /etc/php7/php.ini
 
