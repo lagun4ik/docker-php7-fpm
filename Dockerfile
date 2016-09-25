@@ -6,7 +6,7 @@ ENV TERM=xterm
 
 RUN apk add --update --no-cache git nano unzip
 
-RUN curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN php -r "readfile('http://files.drush.org/drush.phar');" > drush \
     && chmod +x drush \
