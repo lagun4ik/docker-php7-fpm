@@ -3,9 +3,10 @@
 
 This PHP docker image based on [Alpine](https://hub.docker.com/_/alpine/). Alpine is based on [Alpine Linux](http://www.alpinelinux.org), lightweight Linux distribution based on [BusyBox](https://hub.docker.com/_/busybox/). The size of the image is very small, less than 70 MB!
 
-### Development
+### Images
 
-PHPUnit, Composer, Xdebug - switch to a branch (or tag) `dev`
+* [lagun4ik/docker-php7-fpm:latest](https://hub.docker.com/r/lagun4ik/docker-php7-fpm/) - production version
+* [lagun4ik/docker-php7-fpm:dev](https://hub.docker.com/r/lagun4ik/docker-php7-fpm/) - PHPUnit, Composer, Xdebug - switch to a branch (or tag) 
 
 ## Getting The Image
 
