@@ -4,8 +4,8 @@ MAINTAINER ivan@lagunovsky.com
 
 ENV PHP_MEMORY_LIMIT=256M \
    PHP_ERROR_REPORTING=E_ALL \
-   PHP_DISPLAY_ERRORS=On \
-   PHP_DISPLAY_STARTUP_ERRORS=On \
+   PHP_DISPLAY_ERRORS=Off \
+   PHP_DISPLAY_STARTUP_ERRORS=Off \
    PHP_POST_MAX_SIZE=20M \
    PHP_MAX_UPLOAD_FILESIZE=10M \
    PHP_MAX_FILE_UPLOADS=20 \
@@ -15,50 +15,50 @@ ENV PHP_MEMORY_LIMIT=256M \
 
 RUN apk upgrade --update --no-cache && \
     apk add --update --no-cache \
-	ca-certificates \
-	curl \
+    ca-certificates \
+    curl \
     bash
 
-RUN	echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
-	apk add --update --no-cache \
-		php7-mcrypt \
-		php7-soap \
-		php7-openssl \
-		php7-gmp \
-		php7-pdo_odbc \
-		php7-json \
-		php7-dom \
-		php7-pdo \
-		php7-zip \
-		php7-mysqli \
-		php7-sqlite3 \
-		php7-pdo_pgsql \
-		php7-bcmath \
-		php7-gd \
-		php7-odbc \
-		php7-pdo_mysql \
-		php7-pdo_sqlite \
-		php7-gettext \
-		php7-xmlreader \
-		php7-xmlrpc \
-		php7-xml \
-		php7-bz2 \
-		php7-iconv \
-		php7-pdo_dblib \
-		php7-curl \
-		php7-ctype \
-		php7-mongodb \
-		php7-redis \
-		php7-amqp \
-		php7-pcntl \
-		php7-phar \
-		php7-opcache \
-		php7-mbstring \
-		php7-fpm \
-		php7 && \
-	rm -rf /etc/php7/php.ini && \
+    apk add --update --no-cache \
+        php7-mcrypt \
+        php7-soap \
+        php7-openssl \
+        php7-gmp \
+        php7-pdo_odbc \
+        php7-json \
+        php7-dom \
+        php7-pdo \
+        php7-zip \
+        php7-mysqli \
+        php7-sqlite3 \
+        php7-pdo_pgsql \
+        php7-bcmath \
+        php7-gd \
+        php7-odbc \
+        php7-pdo_mysql \
+        php7-pdo_sqlite \
+        php7-gettext \
+        php7-xmlreader \
+        php7-xmlrpc \
+        php7-xml \
+        php7-bz2 \
+        php7-iconv \
+        php7-pdo_dblib \
+        php7-curl \
+        php7-ctype \
+        php7-mongodb \
+        php7-redis \
+        php7-amqp \
+        php7-pcntl \
+        php7-phar \
+        php7-opcache \
+        php7-mbstring \
+        php7-fpm \
+        php7 && \
+    rm -rf /etc/php7/php.ini && \
     ln -s /usr/bin/php7 /usr/bin/php && \
     sed -i "s|;*daemonize\s*=\s*yes|daemonize = no|g" /etc/php7/php-fpm.conf && \
     sed -i "s|;*listen\s*=\s*127.0.0.1:9000|listen = 9000|g" /etc/php7/php-fpm.d/www.conf && \
