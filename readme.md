@@ -3,12 +3,6 @@
 
 This PHP docker image based on [Alpine](https://hub.docker.com/_/alpine/). Alpine is based on [Alpine Linux](http://www.alpinelinux.org), lightweight Linux distribution based on [BusyBox](https://hub.docker.com/_/busybox/). The size of the image is very small, less than 70 MB!
 
-### PHP 7.0
-
-Using these repositories for PHP7 packages
-* [**edge/community**](https://pkgs.alpinelinux.org/packages?name=php7*&branch=&repo=community&arch=&maintainer=)
-* [**edge/testing**](https://pkgs.alpinelinux.org/packages?name=php7*&branch=&repo=testing&arch=&maintainer=)
-
 ## Getting The Image
 
 This image is published in the [Docker Hub](https://hub.docker.com/r/lagun4ik/docker-php7-fpm/). Simply run this command below to get it to your machine.

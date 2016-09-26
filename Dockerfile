@@ -2,8 +2,6 @@ FROM lagun4ik/docker-php7-fpm
 
 MAINTAINER ivan@lagunovsky.com
 
-ENV
-
 ENV TERM=xterm \
     PHP_MEMORY_LIMIT=256M \
     PHP_ERROR_REPORTING=E_ALL \
