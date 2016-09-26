@@ -11,14 +11,7 @@ ENV PHP_MEMORY_LIMIT=256M \
    PHP_MAX_FILE_UPLOADS=20 \
    PHP_DATE_TIMEZONE=Europe/Minsk \
    PHP_OPCACHE_ENABLE=1 \
-   PHP_OPCACHE_ENABLE_CLI=0 \
-   PHP_XDEBUG_REMOTE_AUTOSTART=Off \
-   PHP_XDEBUG_REMOTE_ENABLE=Off \
-   PHP_XDEBUG_REMOTE_HANDLER="dbgp" \
-   PHP_XDEBUG_REMOTE_HOST="localhost" \
-   PHP_XDEBUG_REMOTE_PORT=9001 \
-   PHP_XDEBUG_REMOTE_MODE=req \
-   PHP_XDEBUG_IDEKEY="PHPSTORM"
+   PHP_OPCACHE_ENABLE_CLI=0
 
 RUN apk upgrade --update --no-cache && \
     apk add --update --no-cache \
@@ -56,7 +49,6 @@ RUN	echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
 		php7-pdo_dblib \
 		php7-curl \
 		php7-ctype \
-		php7-xdebug \
 		php7-mongodb \
 		php7-redis \
 		php7-amqp \
