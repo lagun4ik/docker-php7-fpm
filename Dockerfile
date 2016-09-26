@@ -28,6 +28,7 @@ RUN apk upgrade --update --no-cache && \
 
 RUN	echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
+    echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
 	apk add --update --no-cache \
 		php7-mcrypt \
 		php7-soap \
@@ -60,6 +61,7 @@ RUN	echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
 		php7-redis \
 		php7-amqp \
 		php7-pcntl \
+		php7-phar \
 		php7-opcache \
 		php7-mbstring \
 		php7-fpm \
