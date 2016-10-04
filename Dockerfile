@@ -62,6 +62,8 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
     ln -s /usr/bin/php7 /usr/bin/php && \
     sed -i "s|;*daemonize\s*=\s*yes|daemonize = no|g" /etc/php7/php-fpm.conf && \
     sed -i "s|;*listen\s*=\s*127.0.0.1:9000|listen = 9000|g" /etc/php7/php-fpm.d/www.conf && \
+    sed -i "s|user = nobody|user = root|g" /etc/php7/php-fpm.d/www.conf && \
+    sed -i "s|group = nobody|group = root|g" /etc/php7/php-fpm.d/www.conf && \
     sed -i "s|;*listen\s*=\s*/||g" /etc/php7/php-fpm.d/www.conf && \
     mkdir /var/www
 
@@ -76,10 +78,6 @@ RUN apk add --update --no-cache --virtual .build-deps git file re2c autoconf mak
     echo 'extension=memcached.so' >> /etc/php7/conf.d/memcached.ini && \
     apk del .build-deps && \
     apk add --update --na-cache libmemcached
-
-RUN set -x \
-	&& addgroup -g 82 -S www-data \
-	&& adduser -u 82 -D -S -G www-data www-data
 
 COPY ./conf/php.ini /etc/php7/php.ini
 
