@@ -77,6 +77,10 @@ RUN apk add --update --no-cache --virtual .build-deps git file re2c autoconf mak
     apk del .build-deps && \
     apk add --update --na-cache libmemcached
 
+RUN set -x \
+	&& addgroup -g 82 -S www-data \
+	&& adduser -u 82 -D -S -G www-data www-data
+
 COPY ./conf/php.ini /etc/php7/php.ini
 
 WORKDIR /var/www
