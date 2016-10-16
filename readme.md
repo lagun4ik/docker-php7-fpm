@@ -5,7 +5,7 @@ This PHP docker image based on [Alpine](https://hub.docker.com/_/alpine/). Alpin
 
 ## Getting The Image
 
-This image is published in the [Docker Hub](https://hub.docker.com/r/lagun4ik/docker-php7-fpm/). Simply run this command below to get it to your machine.
+This image is published in the [Docker Hub](https://hub.docker.com/r/lagun4ik/php7-fpm/). Simply run this command below to get it to your machine.
     
 ### PHP Configuration
 
