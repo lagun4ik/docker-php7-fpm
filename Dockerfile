@@ -1,4 +1,4 @@
-FROM lagun4ik/docker-php7-fpm
+FROM lagun4ik/php7-fpm
 
 MAINTAINER ivan@lagunovsky.com
 
