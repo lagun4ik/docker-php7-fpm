@@ -56,6 +56,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
         php7-phar \
         php7-opcache \
         php7-mbstring \
+        php7-zlib \
         php7-fpm \
         php7 && \
     rm -rf /etc/php7/php.ini && \
@@ -67,7 +68,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
     sed -i "s|;*listen\s*=\s*/||g" /etc/php7/php-fpm.d/www.conf && \
     mkdir /var/www
 
-RUN apk add --update --no-cache --virtual .build-deps git file re2c autoconf make g++ php7-dev libmemcached-dev cyrus-sasl-dev && \
+RUN apk add --update --no-cache --virtual .build-deps git file re2c autoconf make g++ php7-dev libmemcached-dev cyrus-sasl-dev zlib-dev && \
     cd /tmp && git clone --depth=1 -b php7 https://github.com/php-memcached-dev/php-memcached.git && \
     cd /tmp/php-memcached && \
     phpize7 && \
@@ -77,7 +78,7 @@ RUN apk add --update --no-cache --virtual .build-deps git file re2c autoconf mak
     rm -rf /tmp/php-memcached/ && \
     echo 'extension=memcached.so' >> /etc/php7/conf.d/memcached.ini && \
     apk del .build-deps && \
-    apk add --update --na-cache libmemcached
+    apk add --update --no-cache libmemcached
 
 COPY ./conf/php.ini /etc/php7/php.ini
 
