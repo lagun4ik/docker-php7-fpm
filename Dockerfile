@@ -12,6 +12,10 @@ ENV PHP_MEMORY_LIMIT=256M \
    PHP_DATE_TIMEZONE=Europe/Minsk \
    PHP_OPCACHE_ENABLE=1 \
    PHP_OPCACHE_ENABLE_CLI=0
+   
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
+    echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
+    echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 
 RUN apk upgrade --update --no-cache && \
     apk add --update --no-cache \
@@ -19,10 +23,7 @@ RUN apk upgrade --update --no-cache && \
     curl \
     bash
 
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
-    echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
-    echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
-    apk add --update --no-cache \
+RUN apk add --update --no-cache \
         php7-mcrypt \
         php7-soap \
         php7-openssl \
