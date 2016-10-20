@@ -84,7 +84,6 @@ RUN apk add --update --no-cache --virtual .build-deps git file re2c autoconf mak
 COPY ./conf/php.ini /etc/php7/php.ini
 
 WORKDIR /var/www
-VOLUME ["/var/www"]
 
 EXPOSE 9000
 CMD ["/usr/sbin/php-fpm7", "-R"]
