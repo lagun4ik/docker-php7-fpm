@@ -78,6 +78,7 @@ RUN apk add --update --no-cache --virtual .build-deps git file re2c autoconf mak
 
 COPY ./conf/php.ini /etc/php7/php.ini
 COPY ./conf/www.conf /etc/php7/php-fpm.d/www.conf
+COPY ./conf/php-fpm.conf /etc/php7/php-fpm.conf
 
 WORKDIR /var/www
 
