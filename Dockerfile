@@ -62,11 +62,6 @@ RUN apk add --update --no-cache \
         php7 && \
     rm -rf /etc/php7/php.ini && \
     ln -s /usr/bin/php7 /usr/bin/php && \
-    sed -i "s|;*daemonize\s*=\s*yes|daemonize = no|g" /etc/php7/php-fpm.conf && \
-    sed -i "s|;*listen\s*=\s*127.0.0.1:9000|listen = 9000|g" /etc/php7/php-fpm.d/www.conf && \
-    sed -i "s|user = nobody|user = root|g" /etc/php7/php-fpm.d/www.conf && \
-    sed -i "s|group = nobody|group = root|g" /etc/php7/php-fpm.d/www.conf && \
-    sed -i "s|;*listen\s*=\s*/||g" /etc/php7/php-fpm.d/www.conf && \
     mkdir /var/www
 
 RUN apk add --update --no-cache --virtual .build-deps git file re2c autoconf make g++ php7-dev libmemcached-dev cyrus-sasl-dev zlib-dev && \
@@ -82,6 +77,7 @@ RUN apk add --update --no-cache --virtual .build-deps git file re2c autoconf mak
     apk add --update --no-cache libmemcached
 
 COPY ./conf/php.ini /etc/php7/php.ini
+COPY ./conf/www.conf /etc/php7/php-fpm.d/www.conf
 
 WORKDIR /var/www
 
