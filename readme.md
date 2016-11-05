@@ -1,4 +1,4 @@
-#🏋 Lightweight Docker Image for PHP7 (cli&fpm)
+# 🏋 Lightweight Docker Image for PHP7 (cli&fpm)
  [![Build Status](https://travis-ci.org/lagun4ik/docker-php-dev-stack.svg)](https://travis-ci.org/lagun4ik/docker-php-dev-stack)
 
 This PHP docker image based on [Alpine](https://hub.docker.com/_/alpine/). Alpine is based on [Alpine Linux](http://www.alpinelinux.org), lightweight Linux distribution based on [BusyBox](https://hub.docker.com/_/busybox/). The size of the image is very small, less than 70 MB!
@@ -21,7 +21,14 @@ PHP_MAX_UPLOAD_FILESIZE=10M
 PHP_MAX_FILE_UPLOADS=20
 PHP_DATE_TIMEZONE=Europe/Minsk
 PHP_OPCACHE_ENABLE=1
-PHP_OPCACHE_ENABLE_CLI=0
+PHP_OPCACHE_ENABLE_CLI=1
+PHP_OPCACHE_MEMORY_CONSUMPTION = 256 
+PHP_OPCACHE_INTERNED_STRINGS_BUFFER = 32 
+PHP_OPCACHE_MAX_ACCELERATED_FILES = 100000 
+PHP_OPCACHE_USE_CWD = 0 
+PHP_OPCACHE_VALIDATE_TIMESTAMPS = 1 
+PHP_OPCACHE_REVALIDATE_FREQ = 2 
+PHP_OPCACHE_ENABLE_FILE_OVERRIDE = 1
 PHP_XDEBUG_REMOTE_AUTOSTART=Off
 PHP_XDEBUG_REMOTE_ENABLE=Off
 PHP_XDEBUG_REMOTE_HANDLER="dbgp"
