@@ -21,15 +21,11 @@ ENV TERM=xterm \
     PHP_XDEBUG_REMOTE_MODE=req \
     PHP_XDEBUG_IDEKEY="PHPSTORM"
 
-RUN apk add --update --no-cache git nano unzip php7-xdebug
+RUN apk add --update --no-cache git nano unzip php7-xdebug openssh
 
 COPY ./conf/php.ini /etc/php7/php.ini
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-RUN php -r "readfile('http://files.drush.org/drush.phar');" > drush \
-    && chmod +x drush \
-    && mv drush /usr/local/bin
 
 RUN curl -OsSL https://phar.phpunit.de/phpunit.phar \
     && chmod +x phpunit.phar \
