@@ -29,6 +29,7 @@ ENV TERM=xterm \
     PHP_XDEBUG_IDEKEY="PHPSTORM"
 
 RUN apk add --update --no-cache git nano unzip php7-xdebug openssh less
+RUN rm /etc/php7/conf.d/xdebug.ini
 
 COPY ./conf/php.ini /etc/php7/php.ini
 COPY ./scripts/ /usr/bin/
