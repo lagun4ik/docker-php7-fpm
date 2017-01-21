@@ -72,7 +72,7 @@ RUN apk add --update --no-cache \
     mkdir /var/www
 
 RUN apk add --update --no-cache --virtual .build-deps git file re2c autoconf make g++ php7-dev libmemcached-dev cyrus-sasl-dev zlib-dev && \
-    git clone --depth=1 -b php7 https://github.com/php-memcached-dev/php-memcached.git /tmp/php-memcached && \
+    git clone --depth=1 https://github.com/php-memcached-dev/php-memcached.git /tmp/php-memcached && \
     cd /tmp/php-memcached && \
     phpize7 && \
     ./configure --disable-memcached-sasl --with-php-config=php-config7 && \
