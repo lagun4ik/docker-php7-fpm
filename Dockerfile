@@ -58,9 +58,9 @@ RUN apk add --update --no-cache \
         php7.1-pdo_dblib \
         php7.1-curl \
         php7.1-ctype \
-        php7.1-mongodb \
-        php7.1-redis \
-        php7.1-amqp \
+        php7-mongodb \
+        php7-redis \
+        php7-amqp \
         php7.1-pcntl \
         php7.1-phar \
         php7.1-opcache \
