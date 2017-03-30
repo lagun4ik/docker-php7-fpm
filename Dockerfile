@@ -61,7 +61,7 @@ RUN apk add --update --no-cache \
         php7-pdo_dblib=7.0.17-r1 \
         php7-curl=7.0.17-r1 \
         php7-ctype=7.0.17-r1 \
-        php7-mongodb=3.2.10-r1 \
+        php7-mongodb=1.1.4-r1 \
         php7-redis=3.0.0-r1 \
         php7-amqp=1.7.1-r0 \
         php7-pcntl=7.0.17-r1 \
