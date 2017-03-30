@@ -35,42 +35,42 @@ RUN apk upgrade --update --no-cache && \
     bash
 
 RUN apk add --update --no-cache \
-        php7-mcrypt \
-        php7-soap \
-        php7-openssl \
-        php7-gmp \
-        php7-pdo_odbc \
-        php7-json \
-        php7-dom \
-        php7-pdo \
-        php7-zip \
-        php7-mysqli \
-        php7-sqlite3 \
-        php7-pdo_pgsql \
-        php7-bcmath \
-        php7-gd \
-        php7-odbc \
-        php7-pdo_mysql \
-        php7-pdo_sqlite \
-        php7-gettext \
-        php7-xmlreader \
-        php7-xmlrpc \
-        php7-xml \
-        php7-bz2 \
-        php7-iconv \
-        php7-pdo_dblib \
-        php7-curl \
-        php7-ctype \
-        php7-mongodb \
-        php7-redis \
-        php7-amqp \
-        php7-pcntl \
-        php7-phar \
-        php7-opcache \
-        php7-mbstring \
-        php7-zlib \
-        php7-fpm \
-        php7 && \
+        php7-mcrypt=7.0.17-r1 \
+        php7-soap=7.0.17-r1 \
+        php7-openssl=7.0.17-r1 \
+        php7-gmp=7.0.17-r1 \
+        php7-pdo_odbc=7.0.17-r1 \
+        php7-json=7.0.17-r1 \
+        php7-dom=7.0.17-r1 \
+        php7-pdo=7.0.17-r1 \
+        php7-zip=7.0.17-r1 \
+        php7-mysqli=7.0.17-r1 \
+        php7-sqlite3=7.0.17-r1 \
+        php7-pdo_pgsql=7.0.17-r1 \
+        php7-bcmath=7.0.17-r1 \
+        php7-gd=7.0.17-r1 \
+        php7-odbc=7.0.17-r1 \
+        php7-pdo_mysql=7.0.17-r1 \
+        php7-pdo_sqlite=7.0.17-r1 \
+        php7-gettext=7.0.17-r1 \
+        php7-xmlreader=7.0.17-r1 \
+        php7-xmlrpc=7.0.17-r1 \
+        php7-xml=7.0.17-r1 \
+        php7-bz2=7.0.17-r1 \
+        php7-iconv=7.0.17-r1 \
+        php7-pdo_dblib=7.0.17-r1 \
+        php7-curl=7.0.17-r1 \
+        php7-ctype=7.0.17-r1 \
+        php7-mongodb=7.0.17-r1 \
+        php7-redis=7.0.17-r1 \
+        php7-amqp=7.0.17-r1 \
+        php7-pcntl=7.0.17-r1 \
+        php7-phar=7.0.17-r1 \
+        php7-opcache=7.0.17-r1 \
+        php7-mbstring=7.0.17-r1 \
+        php7-zlib=7.0.17-r1 \
+        php7-fpm=7.0.17-r1 \
+        php7=7.0.17-r1 && \
     rm -rf /etc/php7/php.ini && \
     ln -s /usr/bin/php7 /usr/bin/php && \
     mkdir /var/www
