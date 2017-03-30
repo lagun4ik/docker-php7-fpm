@@ -1,5 +1,5 @@
 # 🏋 Lightweight Docker Image for PHP7 (cli&fpm)
- [![Build Status](https://travis-ci.org/lagun4ik/docker-php-dev-stack.svg)](https://travis-ci.org/lagun4ik/docker-php-dev-stack)
+ [![Build Status](https://travis-ci.org/lagun4ik/docker-php7-fpm.svg)](https://travis-ci.org/lagun4ik/docker-php7-fpm)
 
 This PHP docker image based on [Alpine](https://hub.docker.com/_/alpine/). Alpine is based on [Alpine Linux](http://www.alpinelinux.org), lightweight Linux distribution based on [BusyBox](https://hub.docker.com/_/busybox/). The size of the image is very small, less than 70 MB!
 
