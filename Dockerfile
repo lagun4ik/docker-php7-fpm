@@ -36,6 +36,7 @@ RUN apk upgrade --update --no-cache && \
 
 RUN apk add --update --no-cache \
         php7-mcrypt=7.0.17-r1 \
+        php7-session=7.0.17-r1 \
         php7-soap=7.0.17-r1 \
         php7-openssl=7.0.17-r1 \
         php7-gmp=7.0.17-r1 \
