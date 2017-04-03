@@ -1,4 +1,4 @@
-FROM lagun4ik/php7-fpm:7.0.17-r1
+FROM lagun4ik/php7-fpm:7.1.3
 
 MAINTAINER ivan@lagunovsky.com
 
@@ -12,7 +12,7 @@ ENV TERM=xterm \
     PHP_XDEBUG_REMOTE_MODE=req \
     PHP_XDEBUG_IDEKEY="PHPSTORM"
 
-RUN apk add --update --no-cache git nano unzip php7-xdebug openssh less
+RUN apk add --update --no-cache git nano unzip php7-xdebug=2.5.0-r1 openssh less
 RUN rm /etc/php7/conf.d/xdebug.ini
 
 COPY ./conf/xdebug.ini /etc/php7/conf.d/xdebug.ini
