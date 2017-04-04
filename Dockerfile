@@ -72,6 +72,8 @@ RUN apk add --update --no-cache \
         php7-opcache=7.1.3-r0 \
         php7-mbstring=7.1.3-r0 \
         php7-zlib=7.1.3-r0 \
+        php7-config=7.1.3-r0 \
+        php7-fileinfo=7.1.3-r0 \
         php7-fpm=7.1.3-r0 \
         php7=7.1.3-r0
 
