@@ -12,8 +12,15 @@ ENV TERM=xterm \
     PHP_XDEBUG_REMOTE_MODE=req \
     PHP_XDEBUG_IDEKEY="PHPSTORM"
 
-RUN apk add --update --no-cache git nano unzip php7-xdebug=2.5.0-r1 openssh less
-RUN rm /etc/php7/conf.d/xdebug.ini
+RUN apk add --update --no-cache git nano unzip openssh less
+
+RUN apk add --update --no-cache --virtual .build-deps file re2c autoconf make g++ php7-dev=7.1.3-r0 musl && \
+    git clone --depth=1 -b XDEBUG_2_5_1 https://github.com/xdebug/xdebug.git /tmp/php-xdebug && \
+    cd /tmp/php-xdebug && \
+    phpize && ./configure --prefix=/usr && make && make install && \
+    mv /tmp/php-xdebug/modules/xdebug.so /usr/lib/php7/modules && \
+    cd .. && rm -rf /tmp/php-xdebug/ && \
+    apk del .build-deps
 
 COPY ./conf/xdebug.ini /etc/php7/conf.d/xdebug.ini
 COPY ./scripts/ /usr/bin/
