@@ -61,6 +61,7 @@ RUN apk add --update --no-cache \
         php7-pdo_sqlite=7.1.3-r0 \
         php7-gettext=7.1.3-r0 \
         php7-xmlreader=7.1.3-r0 \
+        php7-xmlwriter=7.1.3-r0 \
         php7-xmlrpc=7.1.3-r0 \
         php7-xml=7.1.3-r0 \
         php7-bz2=7.1.3-r0 \
