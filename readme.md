@@ -33,6 +33,7 @@ gettext
 gmp
 hash
 iconv
+igbinary
 json
 libxml
 mbstring
@@ -40,6 +41,7 @@ mcrypt
 memcached
 mongodb
 mysqli
+mysqlnd
 odbc
 openssl
 pcntl
@@ -50,6 +52,8 @@ pdo_mysql
 PDO_ODBC
 pdo_pgsql
 pdo_sqlite
+Phar
+readline
 redis
 Reflection
 session
@@ -66,6 +70,7 @@ xmlrpc
 xmlwriter
 Zend OPcache
 zip
+zlib
 
 [Zend Modules]
 Zend OPcache
