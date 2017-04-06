@@ -27,7 +27,8 @@ ENV PHP_MEMORY_LIMIT=256M \
    PHP_OPCACHE_VALIDATE_TIMESTAMPS=1 \
    PHP_OPCACHE_REVALIDATE_FREQ=2 \
    PHP_OPCACHE_ENABLE_FILE_OVERRIDE=1 \
-   PHP_ZEND_ASSERTIONS=-1
+   PHP_ZEND_ASSERTIONS=-1 \
+   PHP_IGBINARY_COMPACT_STRINGS=0
 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
