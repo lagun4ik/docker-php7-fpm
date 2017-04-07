@@ -1,4 +1,4 @@
-FROM lagun4ik/php7-fpm:7.1.3-r2
+FROM lagun4ik/php7-fpm:7.1.3-r3
 
 MAINTAINER ivan@lagunovsky.com
 
