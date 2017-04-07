@@ -70,6 +70,7 @@ RUN apk add --update --no-cache \
         php7-curl=7.1.3-r0 \
         php7-ctype=7.1.3-r0 \
         php7-pcntl=7.1.3-r0 \
+        php7-posix=7.1.3-r0 \
         php7-phar=7.1.3-r0 \
         php7-opcache=7.1.3-r0 \
         php7-mbstring=7.1.3-r0 \
