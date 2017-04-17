@@ -18,7 +18,6 @@ RUN apk add --update --no-cache --virtual .build-deps file re2c autoconf make g+
     git clone --depth=1 -b XDEBUG_2_5_1 https://github.com/xdebug/xdebug.git /tmp/php-xdebug && \
     cd /tmp/php-xdebug && \
     phpize && ./configure --prefix=/usr && make && make install && \
-    mv /tmp/php-xdebug/modules/xdebug.so /usr/lib/php7/modules && \
     cd .. && rm -rf /tmp/php-xdebug/ && \
     apk del .build-deps
 
