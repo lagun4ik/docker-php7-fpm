@@ -89,37 +89,32 @@ RUN apk add --update --no-cache --virtual .build-deps git file re2c autoconf mak
     git clone --depth=1 -b 2.0.3 https://github.com/igbinary/igbinary.git /tmp/php-igbinary && \
     cd /tmp/php-igbinary && \
     phpize && ./configure CFLAGS="-O2 -g" --enable-igbinary && make && make install && \
-    mv /tmp/php-igbinary/modules/igbinary.so /usr/lib/php7/modules && \
     cd .. && rm -rf /tmp/php-igbinary/ && \
     echo 'extension=igbinary.so' >> /etc/php7/conf.d/igbinary.ini && \
     \
     git clone --depth=1 -b v3.0.3 https://github.com/php-memcached-dev/php-memcached.git /tmp/php-memcached && \
     cd /tmp/php-memcached && \
     phpize && ./configure --disable-memcached-sasl && make && make install && \
-    mv /tmp/php-memcached/modules/memcached.so /usr/lib/php7/modules && \
     cd .. && rm -rf /tmp/php-memcached/ && \
     echo 'extension=memcached.so' >> /etc/php7/conf.d/memcached.ini && \
     \
     git clone --depth=1 -b 3.1.2 https://github.com/phpredis/phpredis.git /tmp/php-redis && \
     cd /tmp/php-redis && \
     phpize &&  ./configure --enable-redis-igbinary && make && make install && \
-    mv /tmp/php-redis/modules/redis.so /usr/lib/php7/modules && \
     cd .. && rm -rf /tmp/php-redis/ && \
     echo 'extension=redis.so' >> /etc/php7/conf.d/redis.ini && \
     \
     git clone --depth=1 -b v1.9.0 https://github.com/pdezwart/php-amqp.git /tmp/php-amqp && \
     cd /tmp/php-amqp && \
     phpize && ./configure && make && make install && \
-    mv /tmp/php-amqp/modules/amqp.so /usr/lib/php7/modules && \
     cd .. && rm -rf /tmp/php-amqp/ && \
     echo 'extension=amqp.so' >> /etc/php7/conf.d/amqp.ini && \
     \
     # Older drivers do not support LibreSSL https://github.com/mongodb/mongo-php-driver/issues/507
-    git clone --depth=1 -b 	1.1.10 https://github.com/mongodb/mongo-php-driver.git /tmp/php-mongodb && \
+    git clone --depth=1 -b 1.1.10 https://github.com/mongodb/mongo-php-driver.git /tmp/php-mongodb && \
     cd /tmp/php-mongodb && \
     git submodule update --init && \
     phpize && ./configure --prefix=/usr && make && make install && \
-    mv /tmp/php-mongodb/modules/mongodb.so /usr/lib/php7/modules && \
     cd .. && rm -rf /tmp/php-mongodb/ && \
     echo 'extension=mongodb.so' >> /etc/php7/conf.d/mongodb.ini && \
     \
