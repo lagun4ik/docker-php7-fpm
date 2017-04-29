@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+exec php7 /usr/local/phar/composer.phar $*

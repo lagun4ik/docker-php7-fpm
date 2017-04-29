@@ -1,17 +1,18 @@
 # 🏋 Lightweight Docker Image for PHP7 (cli&fpm)
  [![Build Status](https://travis-ci.org/lagun4ik/docker-php7-fpm.svg)](https://travis-ci.org/lagun4ik/docker-php7-fpm)
 
-This PHP docker image based on [Alpine](https://hub.docker.com/_/alpine/). Alpine is based on [Alpine Linux](http://www.alpinelinux.org), lightweight Linux distribution based on [BusyBox](https://hub.docker.com/_/busybox/). The size of the image is very small, less than 70 MB!
 
-### Images
+This PHP docker image based on [Alpine](https://hub.docker.com/_/alpine/).
 
-* [lagun4ik/php7-fpm:latest](https://hub.docker.com/r/lagun4ik/php7-fpm/) - production version
-* [lagun4ik/php7-fpm:dev](https://hub.docker.com/r/lagun4ik/php7-fpm/) - PHPUnit, Composer, Xdebug - switch to a branch (or tag) 
+# Supported tags and `Dockerfile` links
+
+ - [`7.1.4-r0`, `latest` (7.1/Dockerfile)](https://github.com/lagun4ik/docker-php7-fpm/blob/master/7.1/Dockerfile)
+ - [`7.1.4-r0-dev`, `dev` (7.1/Dockerfile)](https://github.com/lagun4ik/docker-php7-fpm/blob/master/7.1-dev/Dockerfile) - PHPUnit, Composer, Xdebug
 
 ## Getting The Image
 
-This image is published in the [Docker Hub](https://hub.docker.com/r/lagun4ik/php7-fpm/). Simply run this command below to get it to your machine.
-    
+This image is published in the [Docker Hub](https://hub.docker.com/r/lagun4ik/php7-fpm/)
+
 ### PHP Configuration
 
 The config is set using environments. See `.env.example`
