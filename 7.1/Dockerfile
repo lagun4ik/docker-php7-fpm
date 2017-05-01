@@ -88,7 +88,7 @@ RUN rm -rf /etc/php7/php.ini && \
 RUN apk add --update --no-cache libmemcached rabbitmq-c
 
 RUN apk add --update --no-cache --virtual .build-deps git file re2c autoconf make g++ php7-dev=7.1.4-r0 libmemcached-dev cyrus-sasl-dev zlib-dev musl rabbitmq-c-dev pcre-dev && \
-    git clone --depth=1 -b 2.0.3 https://github.com/igbinary/igbinary.git /tmp/php-igbinary && \
+    git clone --depth=1 -b 2.0.4 https://github.com/igbinary/igbinary.git /tmp/php-igbinary && \
     cd /tmp/php-igbinary && \
     phpize && ./configure CFLAGS="-O2 -g" --enable-igbinary && make && make install && \
     cd .. && rm -rf /tmp/php-igbinary/ && \
