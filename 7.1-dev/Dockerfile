@@ -1,4 +1,4 @@
-FROM lagun4ik/php7-fpm:7.1.4-r1
+FROM lagun4ik/php7-fpm:7.1.4-r3
 
 MAINTAINER ivan@lagunovsky.com
 
@@ -32,6 +32,6 @@ RUN curl -OsSL https://getcomposer.org/composer.phar \
 RUN curl -OsSL https://phar.phpunit.de/phpunit.phar \
     && mv phpunit.phar /usr/local/phar
 
-RUN chmod +x composer php phpunit
+RUN cd /usr/bin/ && chmod +x composer php phpunit
 
 CMD ["/usr/sbin/php-fpm7", "-R", "-dzend_extension=xdebug.so"]
