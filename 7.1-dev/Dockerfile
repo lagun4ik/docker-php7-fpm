@@ -32,4 +32,6 @@ RUN curl -OsSL https://getcomposer.org/composer.phar \
 RUN curl -OsSL https://phar.phpunit.de/phpunit.phar \
     && mv phpunit.phar /usr/local/phar
 
+RUN chmod +x composer php phpunit
+
 CMD ["/usr/sbin/php-fpm7", "-R", "-dzend_extension=xdebug.so"]
