@@ -78,6 +78,7 @@ RUN apk add --update --no-cache \
         php7-mbstring=7.1.5-r0 \
         php7-zlib=7.1.5-r0 \
         php7-fileinfo=7.1.5-r0 \
+        php7-tokenizer=7.1.5-r0 \
         php7-fpm=7.1.5-r0 \
         php7=7.1.5-r0
 
