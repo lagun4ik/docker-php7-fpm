@@ -67,6 +67,7 @@ RUN apk add --update --no-cache \
         php7-xmlwriter=7.1.6-r0 \
         php7-xmlrpc=7.1.6-r0 \
         php7-xml=7.1.6-r0 \
+        php7-simplexml=7.1.6-r0 \
         php7-bz2=7.1.6-r0 \
         php7-iconv=7.1.6-r0 \
         php7-pdo_dblib=7.1.6-r0 \
