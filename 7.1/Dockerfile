@@ -44,51 +44,51 @@ RUN apk upgrade --update --no-cache && \
     bash
 
 RUN apk add --update --no-cache \
-        php7-session=7.1.5-r0 \
-        php7-mcrypt=7.1.5-r0 \
-        php7-soap=7.1.5-r0 \
-        php7-openssl=7.1.5-r0 \
-        php7-gmp=7.1.5-r0 \
-        php7-pdo_odbc=7.1.5-r0 \
-        php7-json=7.1.5-r0 \
-        php7-dom=7.1.5-r0 \
-        php7-pdo=7.1.5-r0 \
-        php7-zip=7.1.5-r0 \
-        php7-mysqli=7.1.5-r0 \
-        php7-sqlite3=7.1.5-r0 \
-        php7-pdo_pgsql=7.1.5-r0 \
-        php7-bcmath=7.1.5-r0 \
-        php7-gd=7.1.5-r0 \
-        php7-odbc=7.1.5-r0 \
-        php7-pdo_mysql=7.1.5-r0 \
-        php7-pdo_sqlite=7.1.5-r0 \
-        php7-gettext=7.1.5-r0 \
-        php7-xmlreader=7.1.5-r0 \
-        php7-xmlwriter=7.1.5-r0 \
-        php7-xmlrpc=7.1.5-r0 \
-        php7-xml=7.1.5-r0 \
-        php7-bz2=7.1.5-r0 \
-        php7-iconv=7.1.5-r0 \
-        php7-pdo_dblib=7.1.5-r0 \
-        php7-curl=7.1.5-r0 \
-        php7-ctype=7.1.5-r0 \
-        php7-pcntl=7.1.5-r0 \
-        php7-posix=7.1.5-r0 \
-        php7-phar=7.1.5-r0 \
-        php7-opcache=7.1.5-r0 \
-        php7-mbstring=7.1.5-r0 \
-        php7-zlib=7.1.5-r0 \
-        php7-fileinfo=7.1.5-r0 \
-        php7-tokenizer=7.1.5-r0 \
-        php7-fpm=7.1.5-r0 \
-        php7=7.1.5-r0
+        php7-session=7.1.6-r0 \
+        php7-mcrypt=7.1.6-r0 \
+        php7-soap=7.1.6-r0 \
+        php7-openssl=7.1.6-r0 \
+        php7-gmp=7.1.6-r0 \
+        php7-pdo_odbc=7.1.6-r0 \
+        php7-json=7.1.6-r0 \
+        php7-dom=7.1.6-r0 \
+        php7-pdo=7.1.6-r0 \
+        php7-zip=7.1.6-r0 \
+        php7-mysqli=7.1.6-r0 \
+        php7-sqlite3=7.1.6-r0 \
+        php7-pdo_pgsql=7.1.6-r0 \
+        php7-bcmath=7.1.6-r0 \
+        php7-gd=7.1.6-r0 \
+        php7-odbc=7.1.6-r0 \
+        php7-pdo_mysql=7.1.6-r0 \
+        php7-pdo_sqlite=7.1.6-r0 \
+        php7-gettext=7.1.6-r0 \
+        php7-xmlreader=7.1.6-r0 \
+        php7-xmlwriter=7.1.6-r0 \
+        php7-xmlrpc=7.1.6-r0 \
+        php7-xml=7.1.6-r0 \
+        php7-bz2=7.1.6-r0 \
+        php7-iconv=7.1.6-r0 \
+        php7-pdo_dblib=7.1.6-r0 \
+        php7-curl=7.1.6-r0 \
+        php7-ctype=7.1.6-r0 \
+        php7-pcntl=7.1.6-r0 \
+        php7-posix=7.1.6-r0 \
+        php7-phar=7.1.6-r0 \
+        php7-opcache=7.1.6-r0 \
+        php7-mbstring=7.1.6-r0 \
+        php7-zlib=7.1.6-r0 \
+        php7-fileinfo=7.1.6-r0 \
+        php7-tokenizer=7.1.6-r0 \
+        php7-fpm=7.1.6-r0 \
+        php7=7.1.6-r0
 
 RUN rm -rf /etc/php7/php.ini && \
     mkdir /var/www
 
 RUN apk add --update --no-cache libmemcached rabbitmq-c
 
-RUN apk add --update --no-cache --virtual .build-deps git file re2c autoconf make g++ php7-dev=7.1.5-r0 libmemcached-dev cyrus-sasl-dev zlib-dev musl rabbitmq-c-dev pcre-dev && \
+RUN apk add --update --no-cache --virtual .build-deps git file re2c autoconf make g++ php7-dev=7.1.6-r0 libmemcached-dev cyrus-sasl-dev zlib-dev musl rabbitmq-c-dev pcre-dev && \
     git clone --depth=1 -b 2.0.4 https://github.com/igbinary/igbinary.git /tmp/php-igbinary && \
     cd /tmp/php-igbinary && \
     phpize && ./configure CFLAGS="-O2 -g" --enable-igbinary && make && make install && \

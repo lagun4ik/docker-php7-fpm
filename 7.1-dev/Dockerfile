@@ -1,4 +1,4 @@
-FROM lagun4ik/php7-fpm:7.1.5-r2
+FROM lagun4ik/php7-fpm:7.1.6-r0
 
 MAINTAINER ivan@lagunovsky.com
 
@@ -14,7 +14,7 @@ ENV TERM=xterm \
 
 RUN apk add --update --no-cache git nano unzip openssh less
 
-RUN apk add --update --no-cache --virtual .build-deps file re2c autoconf make g++ php7-dev=7.1.5-r0 musl && \
+RUN apk add --update --no-cache --virtual .build-deps file re2c autoconf make g++ php7-dev=7.1.6-r0 musl && \
     git clone --depth=1 -b XDEBUG_2_5_4 https://github.com/xdebug/xdebug.git /tmp/php-xdebug && \
     cd /tmp/php-xdebug && \
     phpize && ./configure --prefix=/usr && make && make install && \
