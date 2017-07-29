@@ -40,6 +40,10 @@ ENV PHP_MEMORY_LIMIT=256M \
    PHP_ZEND_ASSERTIONS=-1 \
    PHP_IGBINARY_COMPACT_STRINGS=1
 
+RUN set -x \
+	&& addgroup -g 82 -S www-data \
+	&& adduser -u 82 -D -S -G www-data www-data
+
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
@@ -138,4 +142,4 @@ COPY ./conf/php-fpm.conf /etc/php7/php-fpm.conf
 WORKDIR /var/www
 
 EXPOSE 9000
-CMD ["/usr/sbin/php-fpm7", "-R"]
+CMD ["/usr/sbin/php-fpm7"]
