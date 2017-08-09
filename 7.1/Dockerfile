@@ -40,10 +40,6 @@ ENV PHP_MEMORY_LIMIT=256M \
    PHP_ZEND_ASSERTIONS=-1 \
    PHP_IGBINARY_COMPACT_STRINGS=1
 
-RUN set -x \
-	&& addgroup -g 82 -S www-data \
-	&& adduser -u 82 -D -S -G www-data www-data
-
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
@@ -138,6 +134,9 @@ RUN apk add --update --no-cache --virtual .build-deps git file re2c autoconf mak
 COPY ./conf/php.ini /etc/php7/php.ini
 COPY ./conf/www.conf /etc/php7/php-fpm.d/www.conf
 COPY ./conf/php-fpm.conf /etc/php7/php-fpm.conf
+
+RUN addgroup -g 1000 -S www-data && \
+	adduser -u 1000 -D -S -h /var/www -s /sbin/nologin -G www-data www-data
 
 WORKDIR /var/www
 
