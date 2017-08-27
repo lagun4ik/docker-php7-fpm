@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -e
+
+CL1='\033[1;36m'
+CL2='\033[1;34m'
+NC='\033[0m'
+
+php7 /usr/local/phar/composer.phar $* && \
+printf "${CL1}run ${CL2}composer-sync${CL1} for clone the vendors to executable volume${NC}\n"

@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [ -z "$VENDOR_DESTINATION" ]
+then
+      echo "ERROR: VENDOR_DESTINATION is not set" 1>&2
+      exit 1
+fi
+
+if [ -z "$VENDOR_SOURCE" ]
+then
+      echo "ERROR: VENDOR_SOURCE is not set" 1>&2
+      exit 1
+fi
+
+command='rsync --recursive --links --perms --times --group --owner --delete "$VENDOR_SOURCE" "$VENDOR_DESTINATION"'
+
+if [ "$1" == 'loop' ]; then
+    echo "vendors sync loop is start"
+    for (( ; ; ))
+    do
+       printf "."
+       eval command
+       printf ". "
+       sleep ${2:-5}
+    done
+else
+    printf "vendors sync is start..."
+    eval command
+    printf "finish\n"
+fi

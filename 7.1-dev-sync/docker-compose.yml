@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  php:
+    image: lagun4ik/php7-fpm
+	working_dir: /var/www/application
+    volumes:
+      - ./application:/var/www/application
+      - vendor:/var/www/application/vendor
+    depends_on:
+      - composer
+
+  composer:
+    image: lagun4ik/php7-fpm:dev-sync
+    working_dir: /var/www/application.full
+    environment:
+      - VENDOR_SYNC_CRON_SCHEDULE=*/30 * * * *
+      - VENDOR_SOURCE=/var/www/application.full/vendor/
+      - VENDOR_DESTINATION=/var/www/application/vendor/
+    volumes:
+      - ./application:/var/www/application.full
+      - vendor:/var/www/application/vendor
+      - $HOME/.composer:/root/.composer
+
+volumes:
+  vendor:
