@@ -1,4 +1,4 @@
-FROM lagun4ik/php7-fpm:7.1.8-r0-dev
+FROM lagun4ik/php7-fpm:7.1.8-r1-dev
 
 COPY ./docker-entrypoint.sh /docker-entrypoint.sh
 COPY ./bin/ /usr/bin/
