@@ -1,11 +1,11 @@
-FROM lagun4ik/php7-fpm:7.1.9-r2-dev
+FROM lagun4ik/php7-fpm:7.1.9-r3-dev
 
 USER root
 
 COPY ./docker-entrypoint.sh /docker-entrypoint.sh
 COPY ./bin/ /usr/bin/
 
-RUN apk add --update --no-cache rsync
+RUN apk add --update --no-cache rsync busybox-suid
 RUN chmod +x /usr/bin/composer /usr/bin/composer-sync /docker-entrypoint.sh
 
 USER www-data
