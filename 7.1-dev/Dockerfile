@@ -1,6 +1,8 @@
-FROM lagun4ik/php7-fpm:7.1.9-r1
+FROM lagun4ik/php7-fpm:7.1.9-r2
 
 MAINTAINER ivan@lagunovsky.com
+
+USER root
 
 ENV XDEBUG_VERSION=XDEBUG_2_5_5
 
@@ -37,3 +39,5 @@ RUN curl -OsSL https://phar.phpunit.de/phpunit.phar \
 RUN cd /usr/bin/ && chmod +x composer php phpunit
 
 CMD ["/usr/sbin/php-fpm7", "-dzend_extension=xdebug.so"]
+
+USER www-data

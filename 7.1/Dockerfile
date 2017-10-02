@@ -5,7 +5,7 @@ MAINTAINER ivan@lagunovsky.com
 ENV PHP_VERSION=7.1.9-r0 \
    IGBINARY_VERSION=2.0.4 \
    PHP_MEMCACHED_VERSION=3.0.3 \
-   PHPREDIS_VERSION=3.1.3 \
+   PHPREDIS_VERSION=3.1.4 \
    PHP_AMQP_VERSION=1.9.0 \
    MONGO_PHP_DRIVER_VERSION=1.1.10
 
@@ -150,6 +150,7 @@ RUN addgroup -g 1000 -S www-data && \
 	adduser -u 1000 -D -S -h /var/www -s /sbin/nologin -G www-data www-data
 
 WORKDIR /var/www
+USER www-data
 
 EXPOSE 9000
 CMD ["/usr/sbin/php-fpm7"]
