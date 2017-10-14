@@ -55,8 +55,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositori
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 
-RUN apk upgrade --update --no-cache && \
-    apk add --update --no-cache \
+RUN apk add --update --no-cache \
     ca-certificates \
     curl \
     bash
