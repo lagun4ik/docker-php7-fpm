@@ -6,9 +6,9 @@ This PHP docker image based on [Alpine](https://hub.docker.com/_/alpine/).
 
 ## Supported tags and `Dockerfile` links
 
- - [`7.1.9-r3`, `latest` (7.1/Dockerfile)](https://github.com/lagun4ik/docker-php7-fpm/blob/master/7.1/Dockerfile)
- - [`7.1.9-r3-dev`, `dev` (7.1-dev/Dockerfile)](https://github.com/lagun4ik/docker-php7-fpm/blob/master/7.1-dev/Dockerfile) - PHPUnit, Composer, Xdebug
- - [`7.1.9-r3-dev-sync`, `dev-sync` (7.1-dev/Dockerfile)](https://github.com/lagun4ik/docker-php7-fpm/blob/master/7.1-dev-sync/Dockerfile) - for the improve performance volumes on Windows or macOS
+ - [`7.1.10-r0`, `latest` (7.1/Dockerfile)](https://github.com/lagun4ik/docker-php7-fpm/blob/master/7.1/Dockerfile)
+ - [`7.1.10-r0-dev`, `dev` (7.1-dev/Dockerfile)](https://github.com/lagun4ik/docker-php7-fpm/blob/master/7.1-dev/Dockerfile) - PHPUnit, Composer, Xdebug
+ - [`7.1.10-r0-dev-sync`, `dev-sync` (7.1-dev/Dockerfile)](https://github.com/lagun4ik/docker-php7-fpm/blob/master/7.1-dev-sync/Dockerfile) - for the improve performance volumes on Windows or macOS
 
 ## Getting The Image
 

@@ -1,4 +1,4 @@
-FROM lagun4ik/php7-fpm:7.1.9-r3-dev
+FROM lagun4ik/php7-fpm:7.1.10-r0-dev
 
 USER root
 
