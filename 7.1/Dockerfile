@@ -51,14 +51,13 @@ ENV PHP_MEMORY_LIMIT=256M \
    PHP_PM_PROCESS_IDLE_TIMEOUT=60s \
    PHP_PM_MAX_REQUESTS=500
 
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
-    echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
-    echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
-
-RUN apk add --update --no-cache \
+RUN apk upgrade --update --no-cache && \
+    apk add --update --no-cache \
     ca-certificates \
     curl \
     bash
+
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 
 RUN apk add --update --no-cache \
         php7-session=${PHP_VERSION} \
