@@ -57,7 +57,8 @@ RUN apk upgrade --update --no-cache && \
     curl \
     bash
 
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
+    echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories
 
 RUN apk add --update --no-cache \
         php7-session=${PHP_VERSION} \
