@@ -2,7 +2,7 @@ FROM alpine:3.6
 
 MAINTAINER ivan@lagunovsky.com
 
-ENV PHP_VERSION=7.1.10-r0 \
+ENV PHP_VERSION=7.1.11-r1 \
    IGBINARY_VERSION=2.0.4 \
    PHP_MEMCACHED_VERSION=3.0.3 \
    PHPREDIS_VERSION=3.1.4 \
@@ -145,7 +145,9 @@ COPY ./conf/www.conf /etc/php7/php-fpm.d/www.conf
 COPY ./conf/php-fpm.conf /etc/php7/php-fpm.conf
 
 RUN addgroup -g 1000 -S www-data && \
-	adduser -u 1000 -D -S -h /var/www -s /sbin/nologin -G www-data www-data
+	adduser -u 1000 -D -S -h /var/www -s /sbin/nologin -G www-data www-data && \
+	touch /var/spool/cron/crontabs/www-data && \
+	chown www-data:www-data /var/spool/cron/crontabs/www-data
 
 WORKDIR /var/www
 USER www-data
