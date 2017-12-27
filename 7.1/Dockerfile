@@ -63,6 +63,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories
 
 RUN apk add --update --no-cache \
+        libbsd=0.8.6-r1 \
         php7-session=${PHP_VERSION} \
         php7-mcrypt=${PHP_VERSION} \
         php7-soap=${PHP_VERSION} \
