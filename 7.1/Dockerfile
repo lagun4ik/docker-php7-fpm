@@ -1,13 +1,13 @@
-FROM alpine:3.6
+FROM alpine:3.7
 
 MAINTAINER ivan@lagunovsky.com
 
-ENV PHP_VERSION=7.1.12-r0 \
-   IGBINARY_VERSION=2.0.4 \
-   PHP_MEMCACHED_VERSION=3.0.3 \
-   PHPREDIS_VERSION=3.1.4 \
+ENV PHP_VERSION=7.1.14-r0 \
+   IGBINARY_VERSION=2.0.5 \
+   PHP_MEMCACHED_VERSION=3.0.4 \
+   PHPREDIS_VERSION=3.1.6 \
    PHP_AMQP_VERSION=1.9.0 \
-   MONGO_PHP_DRIVER_VERSION=1.1.10
+   MONGO_PHP_DRIVER_VERSION=1.4.1
 
 ENV PHP_MEMORY_LIMIT=256M \
    PHP_PRECISION=-1 \
@@ -63,7 +63,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories
 
 RUN apk add --update --no-cache \
-        libbsd=0.8.6-r1 \
+        libbsd=0.8.6-r2 \
         php7-session=${PHP_VERSION} \
         php7-mcrypt=${PHP_VERSION} \
         php7-soap=${PHP_VERSION} \
@@ -134,7 +134,6 @@ RUN apk add --update --no-cache --virtual .build-deps git file re2c autoconf mak
     cd .. && rm -rf /tmp/php-amqp/ && \
     echo 'extension=amqp.so' >> /etc/php7/conf.d/amqp.ini && \
     \
-    # Older drivers do not support LibreSSL https://github.com/mongodb/mongo-php-driver/issues/507
     git clone --depth=1 -b ${MONGO_PHP_DRIVER_VERSION} https://github.com/mongodb/mongo-php-driver.git /tmp/php-mongodb && \
     cd /tmp/php-mongodb && \
     git submodule update --init && \

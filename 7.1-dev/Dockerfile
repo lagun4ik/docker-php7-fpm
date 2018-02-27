@@ -1,10 +1,10 @@
-FROM lagun4ik/php7-fpm:7.1.12-r0
+FROM lagun4ik/php7-fpm:7.1.14-r0
 
 MAINTAINER ivan@lagunovsky.com
 
 USER root
 
-ENV XDEBUG_VERSION=XDEBUG_2_5_5
+ENV XDEBUG_VERSION=2.6.0
 
 ENV TERM=xterm \
     PHP_OPCACHE_ENABLE_CLI=1 \
