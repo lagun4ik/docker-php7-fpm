@@ -1,13 +1,6 @@
 FROM alpine:3.7
 
-MAINTAINER ivan@lagunovsky.com
-
-ENV PHP_VERSION=7.1.14-r0 \
-   IGBINARY_VERSION=2.0.5 \
-   PHP_MEMCACHED_VERSION=3.0.4 \
-   PHPREDIS_VERSION=3.1.6 \
-   PHP_AMQP_VERSION=1.9.0 \
-   MONGO_PHP_DRIVER_VERSION=1.4.1
+LABEL maintainer="ivan@lagunovsky.com"
 
 ENV PHP_MEMORY_LIMIT=256M \
    PHP_PRECISION=-1 \
@@ -60,47 +53,83 @@ RUN apk upgrade --update --no-cache && \
     bash
 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
-    echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories
+    echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
+    echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
+
+ARG PHP_VERSION
+ARG PHP_MCRYPT_VERSION
+ARG PHP_MONGODB_VERSION
+ARG PHP_MEMCACHED_VERSION
+ARG PHP_REDIS_VERSION
+ARG PHP_AMQP_VERSION
+ARG IGBINARY_VERSION
 
 RUN apk add --update --no-cache \
-        libbsd=0.8.6-r2 \
-        php7-session=${PHP_VERSION} \
-        php7-mcrypt=${PHP_VERSION} \
-        php7-soap=${PHP_VERSION} \
-        php7-openssl=${PHP_VERSION} \
-        php7-gmp=${PHP_VERSION} \
-        php7-pdo_odbc=${PHP_VERSION} \
-        php7-json=${PHP_VERSION} \
-        php7-dom=${PHP_VERSION} \
-        php7-pdo=${PHP_VERSION} \
-        php7-zip=${PHP_VERSION} \
-        php7-mysqli=${PHP_VERSION} \
-        php7-sqlite3=${PHP_VERSION} \
-        php7-pdo_pgsql=${PHP_VERSION} \
+        php7-mcrypt=${PHP_MCRYPT_VERSION} \
+        php7-mongodb=${PHP_MONGODB_VERSION} \
+        php7-memcached=${PHP_MEMCACHED_VERSION} \
+        php7-redis=${PHP_REDIS_VERSION} \
+        php7-amqp=${PHP_AMQP_VERSION} \
+        php7-common=${PHP_VERSION} \
         php7-bcmath=${PHP_VERSION} \
-        php7-gd=${PHP_VERSION} \
-        php7-odbc=${PHP_VERSION} \
-        php7-pdo_mysql=${PHP_VERSION} \
-        php7-pdo_sqlite=${PHP_VERSION} \
-        php7-gettext=${PHP_VERSION} \
-        php7-xmlreader=${PHP_VERSION} \
-        php7-xmlwriter=${PHP_VERSION} \
-        php7-xmlrpc=${PHP_VERSION} \
-        php7-xml=${PHP_VERSION} \
-        php7-simplexml=${PHP_VERSION} \
         php7-bz2=${PHP_VERSION} \
-        php7-iconv=${PHP_VERSION} \
-        php7-pdo_dblib=${PHP_VERSION} \
-        php7-curl=${PHP_VERSION} \
+        php7-calendar=${PHP_VERSION} \
         php7-ctype=${PHP_VERSION} \
-        php7-pcntl=${PHP_VERSION} \
-        php7-posix=${PHP_VERSION} \
-        php7-phar=${PHP_VERSION} \
-        php7-opcache=${PHP_VERSION} \
-        php7-mbstring=${PHP_VERSION} \
-        php7-zlib=${PHP_VERSION} \
+        php7-curl=${PHP_VERSION} \
+        php7-dom=${PHP_VERSION} \
+        php7-enchant=${PHP_VERSION} \
+        php7-exif=${PHP_VERSION} \
         php7-fileinfo=${PHP_VERSION} \
+        php7-ftp=${PHP_VERSION} \
+        php7-gd=${PHP_VERSION} \
+        php7-gettext=${PHP_VERSION} \
+        php7-gmp=${PHP_VERSION} \
+        php7-iconv=${PHP_VERSION} \
+        php7-imap=${PHP_VERSION} \
+        php7-intl=${PHP_VERSION} \
+        php7-json=${PHP_VERSION} \
+        php7-ldap=${PHP_VERSION} \
+        php7-litespeed=${PHP_VERSION} \
+        php7-mbstring=${PHP_VERSION} \
+        php7-mysqli=${PHP_VERSION} \
+        php7-mysqlnd=${PHP_VERSION} \
+        php7-odbc=${PHP_VERSION} \
+        php7-opcache=${PHP_VERSION} \
+        php7-openssl=${PHP_VERSION} \
+        php7-pcntl=${PHP_VERSION} \
+        php7-pdo=${PHP_VERSION} \
+        php7-pdo_dblib=${PHP_VERSION} \
+        php7-pdo_mysql=${PHP_VERSION} \
+        php7-pdo_odbc=${PHP_VERSION} \
+        php7-pdo_pgsql=${PHP_VERSION} \
+        php7-pdo_sqlite=${PHP_VERSION} \
+        php7-pear=${PHP_VERSION} \
+        php7-pgsql=${PHP_VERSION} \
+        php7-phar=${PHP_VERSION} \
+        php7-phpdbg=${PHP_VERSION} \
+        php7-posix=${PHP_VERSION} \
+        php7-pspell=${PHP_VERSION} \
+        php7-recode=${PHP_VERSION} \
+        php7-session=${PHP_VERSION} \
+        php7-shmop=${PHP_VERSION} \
+        php7-simplexml=${PHP_VERSION} \
+        php7-snmp=${PHP_VERSION} \
+        php7-soap=${PHP_VERSION} \
+        php7-sockets=${PHP_VERSION} \
+        php7-sodium=${PHP_VERSION} \
+        php7-sqlite3=${PHP_VERSION} \
+        php7-sysvmsg=${PHP_VERSION} \
+        php7-sysvsem=${PHP_VERSION} \
+        php7-sysvshm=${PHP_VERSION} \
+        php7-tidy=${PHP_VERSION} \
         php7-tokenizer=${PHP_VERSION} \
+        php7-wddx=${PHP_VERSION} \
+        php7-xml=${PHP_VERSION} \
+        php7-xmlreader=${PHP_VERSION} \
+        php7-xmlrpc=${PHP_VERSION} \
+        php7-xmlwriter=${PHP_VERSION} \
+        php7-xsl=${PHP_VERSION} \
+        php7-zip=${PHP_VERSION} \
         php7-fpm=${PHP_VERSION} \
         php7=${PHP_VERSION}
 
@@ -116,36 +145,11 @@ RUN apk add --update --no-cache --virtual .build-deps git file re2c autoconf mak
     cd .. && rm -rf /tmp/php-igbinary/ && \
     echo 'extension=igbinary.so' >> /etc/php7/conf.d/igbinary.ini && \
     \
-    git clone --depth=1 -b v${PHP_MEMCACHED_VERSION} https://github.com/php-memcached-dev/php-memcached.git /tmp/php-memcached && \
-    cd /tmp/php-memcached && \
-    phpize && ./configure --disable-memcached-sasl && make && make install && \
-    cd .. && rm -rf /tmp/php-memcached/ && \
-    echo 'extension=memcached.so' >> /etc/php7/conf.d/memcached.ini && \
-    \
-    git clone --depth=1 -b ${PHPREDIS_VERSION} https://github.com/phpredis/phpredis.git /tmp/php-redis && \
-    cd /tmp/php-redis && \
-    phpize &&  ./configure --enable-redis-igbinary && make && make install && \
-    cd .. && rm -rf /tmp/php-redis/ && \
-    echo 'extension=redis.so' >> /etc/php7/conf.d/redis.ini && \
-    \
-    git clone --depth=1 -b v${PHP_AMQP_VERSION} https://github.com/pdezwart/php-amqp.git /tmp/php-amqp && \
-    cd /tmp/php-amqp && \
-    phpize && ./configure && make && make install && \
-    cd .. && rm -rf /tmp/php-amqp/ && \
-    echo 'extension=amqp.so' >> /etc/php7/conf.d/amqp.ini && \
-    \
-    git clone --depth=1 -b ${MONGO_PHP_DRIVER_VERSION} https://github.com/mongodb/mongo-php-driver.git /tmp/php-mongodb && \
-    cd /tmp/php-mongodb && \
-    git submodule update --init && \
-    phpize && ./configure --prefix=/usr && make && make install && \
-    cd .. && rm -rf /tmp/php-mongodb/ && \
-    echo 'extension=mongodb.so' >> /etc/php7/conf.d/mongodb.ini && \
-    \
     apk del .build-deps
 
-COPY ./conf/php.ini /etc/php7/php.ini
-COPY ./conf/www.conf /etc/php7/php-fpm.d/www.conf
-COPY ./conf/php-fpm.conf /etc/php7/php-fpm.conf
+COPY conf/php.ini /etc/php7/php.ini
+COPY conf/www.conf /etc/php7/php-fpm.d/www.conf
+COPY conf/php-fpm.conf /etc/php7/php-fpm.conf
 
 RUN addgroup -g 1000 -S www-data && \
 	adduser -u 1000 -D -S -h /var/www -s /sbin/nologin -G www-data www-data && \

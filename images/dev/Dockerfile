@@ -1,10 +1,10 @@
-FROM lagun4ik/php7-fpm:7.1.14-r0
+ARG BUILD_VERSION
+
+FROM lagun4ik/php7-fpm:${BUILD_VERSION}
 
 MAINTAINER ivan@lagunovsky.com
 
 USER root
-
-ENV XDEBUG_VERSION=2.6.0
 
 ENV TERM=xterm \
     PHP_OPCACHE_ENABLE_CLI=1 \
@@ -16,17 +16,12 @@ ENV TERM=xterm \
     PHP_XDEBUG_REMOTE_MODE=req \
     PHP_XDEBUG_IDEKEY="PHPSTORM"
 
-RUN apk add --update --no-cache git nano unzip openssh less
+ARG PHP_XDEBUG_VERSION
 
-RUN apk add --update --no-cache --virtual .build-deps file re2c autoconf make g++ php7-dev=${PHP_VERSION} musl && \
-    git clone --depth=1 -b ${XDEBUG_VERSION} https://github.com/xdebug/xdebug.git /tmp/php-xdebug && \
-    cd /tmp/php-xdebug && \
-    phpize && ./configure --prefix=/usr && make && make install && \
-    cd .. && rm -rf /tmp/php-xdebug/ && \
-    apk del .build-deps
+RUN apk add --update --no-cache git nano unzip openssh less php7-xdebug=${PHP_XDEBUG_VERSION}
 
-COPY ./conf/xdebug.ini /etc/php7/conf.d/xdebug.ini
-COPY ./bin/ /usr/bin/
+COPY conf/xdebug.ini /etc/php7/conf.d/xdebug.ini
+COPY bin /usr/bin/
 
 RUN mkdir /usr/local/phar
 

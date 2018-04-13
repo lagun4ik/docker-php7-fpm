@@ -1,0 +1,34 @@
+version: '3.6'
+
+services:
+  core:
+    build:
+      context: ../images/core
+      args:
+        PHP_VERSION: ${PHP_VERSION}
+        PHP_MCRYPT_VERSION: ${PHP_MCRYPT_VERSION}
+        PHP_MONGODB_VERSION: ${PHP_MONGODB_VERSION}
+        PHP_MEMCACHED_VERSION: ${PHP_MEMCACHED_VERSION}
+        PHP_REDIS_VERSION: ${PHP_REDIS_VERSION}
+        PHP_AMQP_VERSION: ${PHP_AMQP_VERSION}
+        IGBINARY_VERSION: ${IGBINARY_VERSION}
+    image: lagun4ik/php7-fpm:${BUILD_VERSION}
+
+  dev:
+    build:
+      context: ../images/dev
+      args:
+        BUILD_VERSION: ${BUILD_VERSION}
+        PHP_XDEBUG_VERSION: ${PHP_XDEBUG_VERSION}
+    image: lagun4ik/php7-fpm:${BUILD_VERSION}-dev
+    depends_on:
+      - core
+
+  dev-sync:
+    build:
+      context: ../images/dev-sync
+      args:
+        BUILD_VERSION: ${BUILD_VERSION}
+    image: lagun4ik/php7-fpm:${BUILD_VERSION}-dev-sync
+    depends_on:
+      - dev
