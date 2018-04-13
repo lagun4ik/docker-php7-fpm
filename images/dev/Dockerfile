@@ -18,7 +18,7 @@ ENV TERM=xterm \
 
 ARG PHP_XDEBUG_VERSION
 
-RUN apk add --update --no-cache sudo git nano unzip openssh less php7-xdebug=${PHP_XDEBUG_VERSION}
+RUN apk add --update --no-cache sudo git nano unzip openssh php7-xdebug=${PHP_XDEBUG_VERSION}
 
 COPY conf/xdebug.ini /etc/php7/conf.d/xdebug.ini
 COPY bin /usr/bin/
