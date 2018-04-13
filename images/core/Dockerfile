@@ -56,13 +56,13 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 
-ARG PHP_VERSION
-ARG PHP_MCRYPT_VERSION
-ARG PHP_MONGODB_VERSION
-ARG PHP_MEMCACHED_VERSION
-ARG PHP_REDIS_VERSION
-ARG PHP_AMQP_VERSION
-ARG IGBINARY_VERSION
+ARG PHP_VERSION=7.2.4-r1
+ARG PHP_MCRYPT_VERSION=1.0.1-r0
+ARG PHP_MONGODB_VERSION=1.4.2-r2
+ARG PHP_MEMCACHED_VERSION=3.0.4-r1
+ARG PHP_REDIS_VERSION=4.0.0-r1
+ARG PHP_AMQP_VERSION=1.9.3-r1
+ARG IGBINARY_VERSION=2.0.5
 
 RUN apk add --update --no-cache \
         php7-mcrypt=${PHP_MCRYPT_VERSION} \
