@@ -136,7 +136,7 @@ RUN apk add --update --no-cache \
 RUN rm -rf /etc/php7/php.ini && \
     mkdir /var/www
 
-RUN apk add --update --no-cache libmemcached rabbitmq-c
+RUN apk add --update --no-cache libmemcached rabbitmq-c libzip
 
 RUN apk add --update --no-cache --virtual .build-deps git file re2c autoconf make g++ php7-dev=${PHP_VERSION} libmemcached-dev cyrus-sasl-dev zlib-dev musl rabbitmq-c-dev pcre-dev && \
     git clone --depth=1 -b ${IGBINARY_VERSION} https://github.com/igbinary/igbinary.git /tmp/php-igbinary && \
