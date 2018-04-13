@@ -64,6 +64,8 @@ ARG PHP_REDIS_VERSION=4.0.0-r1
 ARG PHP_AMQP_VERSION=1.9.3-r1
 ARG IGBINARY_VERSION=2.0.5
 
+RUN apk add --update --no-cache libmemcached rabbitmq-c libzip
+
 RUN apk add --update --no-cache \
         php7-mcrypt=${PHP_MCRYPT_VERSION} \
         php7-mongodb=${PHP_MONGODB_VERSION} \
@@ -135,8 +137,6 @@ RUN apk add --update --no-cache \
 
 RUN rm -rf /etc/php7/php.ini && \
     mkdir /var/www
-
-RUN apk add --update --no-cache libmemcached rabbitmq-c libzip
 
 RUN apk add --update --no-cache --virtual .build-deps git file re2c autoconf make g++ php7-dev=${PHP_VERSION} libmemcached-dev cyrus-sasl-dev zlib-dev musl rabbitmq-c-dev pcre-dev && \
     git clone --depth=1 -b ${IGBINARY_VERSION} https://github.com/igbinary/igbinary.git /tmp/php-igbinary && \
