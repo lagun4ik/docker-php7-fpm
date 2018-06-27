@@ -7,14 +7,15 @@ MAINTAINER ivan@lagunovsky.com
 USER root
 
 ENV TERM=xterm \
-    PHP_OPCACHE_ENABLE_CLI=1 \
+    PHP_DISPLAY_ERRORS=1 \
+    PHP_DISPLAY_STARTUP_ERRORS=1 \
     PHP_XDEBUG_REMOTE_AUTOSTART=Off \
     PHP_XDEBUG_REMOTE_ENABLE=Off \
     PHP_XDEBUG_REMOTE_HANDLER="dbgp" \
     PHP_XDEBUG_REMOTE_HOST="localhost" \
     PHP_XDEBUG_REMOTE_PORT=9001 \
     PHP_XDEBUG_REMOTE_MODE=req \
-    PHP_XDEBUG_IDEKEY="PHPSTORM"
+    PHP_XDEBUG_IDEKEY="PHP_IDE"
 
 ARG PHP_XDEBUG_VERSION
 
@@ -33,6 +34,8 @@ RUN curl -OsSL https://phar.phpunit.de/phpunit.phar \
 
 RUN cd /usr/bin/ && chmod +x composer php phpunit
 
-CMD ["/usr/sbin/php-fpm7", "-dzend_extension=xdebug.so"]
-
 USER www-data
+
+VOLUME ['/home/www-data/.composer']
+
+CMD ["/usr/sbin/php-fpm7", "-dzend_extension=xdebug.so"]

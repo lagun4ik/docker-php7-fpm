@@ -6,9 +6,9 @@ This PHP docker image based on [Alpine](https://hub.docker.com/_/alpine/).
 
 ## Supported tags and `Dockerfile` links
 
- - [`7.2.4-r2`, `latest` (7.1/Dockerfile)](https://github.com/lagun4ik/docker-php7-fpm/blob/master/images/core/Dockerfile)
- - [`7.2.4-r2-dev`, `dev` (7.1-dev/Dockerfile)](https://github.com/lagun4ik/docker-php7-fpm/blob/master/images/dev/Dockerfile) - PHPUnit, Composer, Xdebug
- - [`7.2.4-r2-dev-sync`, `dev-sync` (7.1-dev/Dockerfile)](https://github.com/lagun4ik/docker-php7-fpm/blob/master/images/dev-sync/Dockerfile) - for the improve performance volumes on Windows or macOS
+ - [`7.2.7-r0`, `latest` (7.1/Dockerfile)](https://github.com/lagun4ik/docker-php7-fpm/blob/master/images/core/Dockerfile)
+ - [`7.2.7-r0-dev`, `dev` (7.1-dev/Dockerfile)](https://github.com/lagun4ik/docker-php7-fpm/blob/master/images/dev/Dockerfile) - PHPUnit, Composer, Xdebug
+ - [`7.2.7-r0-dev-sync`, `dev-sync` (7.1-dev/Dockerfile)](https://github.com/lagun4ik/docker-php7-fpm/blob/master/images/dev-sync/Dockerfile) - for the improve performance volumes on Windows or macOS
 
 ## Getting The Image
 
@@ -26,23 +26,31 @@ You can run `composer-sync loop [SECONDS]` in the container for continuous synch
 
 ### PHP Modules
 ```
+[PHP Modules]
 amqp
 bcmath
 bz2
+calendar
 Core
 ctype
 curl
 date
 dom
+enchant
+exif
 fileinfo
 filter
+ftp
 gd
 gettext
 gmp
 hash
 iconv
 igbinary
+imap
+intl
 json
+ldap
 libxml
 mbstring
 mcrypt
@@ -60,22 +68,35 @@ pdo_mysql
 PDO_ODBC
 pdo_pgsql
 pdo_sqlite
+pgsql
 Phar
+posix
+pspell
 readline
+recode
 redis
 Reflection
 session
+shmop
 SimpleXML
+snmp
 soap
+sockets
+sodium
 SPL
 sqlite3
 standard
+sysvmsg
+sysvsem
+sysvshm
+tidy
 tokenizer
-xdebug
+wddx
 xml
 xmlreader
 xmlrpc
 xmlwriter
+xsl
 Zend OPcache
 zip
 zlib

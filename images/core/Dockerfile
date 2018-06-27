@@ -28,7 +28,7 @@ ENV PHP_MEMORY_LIMIT=256M \
    PHP_SESSION_GC_PROBABILITY=1 \
    PHP_SESSION_GC_DIVISOR=10000 \
    PHP_OPCACHE_ENABLE=1 \
-   PHP_OPCACHE_ENABLE_CLI=0 \
+   PHP_OPCACHE_ENABLE_CLI=1 \
    PHP_OPCACHE_MEMORY_CONSUMPTION=128 \
    PHP_OPCACHE_INTERNED_STRINGS_BUFFER=32 \
    PHP_OPCACHE_MAX_ACCELERATED_FILES=10000 \
@@ -56,13 +56,13 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 
-ARG PHP_VERSION=7.2.4-r1
+ARG PHP_VERSION=7.2.7-r0
 ARG PHP_MCRYPT_VERSION=1.0.1-r0
-ARG PHP_MONGODB_VERSION=1.4.2-r2
+ARG PHP_MONGODB_VERSION=1.4.4-r0
 ARG PHP_MEMCACHED_VERSION=3.0.4-r1
-ARG PHP_REDIS_VERSION=4.0.0-r1
+ARG PHP_REDIS_VERSION=4.0.2-r0
 ARG PHP_AMQP_VERSION=1.9.3-r1
-ARG IGBINARY_VERSION=2.0.5
+ARG PHP_IGBINARY_VERSION=2.0.6-r0
 
 RUN apk add --update --no-cache libmemcached rabbitmq-c libzip
 
@@ -72,6 +72,7 @@ RUN apk add --update --no-cache \
         php7-memcached=${PHP_MEMCACHED_VERSION} \
         php7-redis=${PHP_REDIS_VERSION} \
         php7-amqp=${PHP_AMQP_VERSION} \
+        php7-igbinary=${PHP_IGBINARY_VERSION} \
         php7-common=${PHP_VERSION} \
         php7-bcmath=${PHP_VERSION} \
         php7-bz2=${PHP_VERSION} \
@@ -138,25 +139,16 @@ RUN apk add --update --no-cache \
 RUN rm -rf /etc/php7/php.ini && \
     mkdir /var/www
 
-RUN apk add --update --no-cache --virtual .build-deps git file re2c autoconf make g++ php7-dev=${PHP_VERSION} libmemcached-dev cyrus-sasl-dev zlib-dev musl rabbitmq-c-dev pcre-dev && \
-    git clone --depth=1 -b ${IGBINARY_VERSION} https://github.com/igbinary/igbinary.git /tmp/php-igbinary && \
-    cd /tmp/php-igbinary && \
-    phpize && ./configure CFLAGS="-O2 -g" --enable-igbinary && make && make install && \
-    cd .. && rm -rf /tmp/php-igbinary/ && \
-    echo 'extension=igbinary.so' >> /etc/php7/conf.d/igbinary.ini && \
-    \
-    apk del .build-deps
-
 COPY conf/php.ini /etc/php7/php.ini
 COPY conf/www.conf /etc/php7/php-fpm.d/www.conf
 COPY conf/php-fpm.conf /etc/php7/php-fpm.conf
 
 RUN addgroup -g 1000 -S www-data && \
-	adduser -u 1000 -D -S -h /var/www -s /sbin/nologin -G www-data www-data && \
+	adduser -u 1000 -D -S -s /sbin/nologin -G www-data www-data && \
 	touch /var/spool/cron/crontabs/www-data && \
 	chown www-data:www-data /var/spool/cron/crontabs/www-data
 
-WORKDIR /var/www
+WORKDIR /var/www/application
 USER www-data
 
 EXPOSE 9000
