@@ -15,11 +15,18 @@ ENV TERM=xterm \
     PHP_XDEBUG_REMOTE_HOST="localhost" \
     PHP_XDEBUG_REMOTE_PORT=9001 \
     PHP_XDEBUG_REMOTE_MODE=req \
-    PHP_XDEBUG_IDEKEY="PHP_IDE"
+    PHP_XDEBUG_IDEKEY="PHP_IDE" \
+    PHP_XDEBUG_PROFILER_AGGREGATE=0 \
+    PHP_XDEBUG_PROFILER_APPEND=0 \
+    PHP_XDEBUG_PROFILER_ENABLE=0 \
+    PHP_XDEBUG_PROFILER_ENABLE_TRIGGER=0 \
+    PHP_XDEBUG_PROFILER_ENABLE_TRIGGER_VALUE="" \
+    PHP_XDEBUG_PROFILER_OUTPUT_DIR="/tmp" \
+    PHP_XDEBUG_PROFILER_OUTPUT_NAME="cachegrind.out.%p"
 
 ARG PHP_XDEBUG_VERSION
 
-RUN apk add --update --no-cache sudo git nano unzip openssh php7-xdebug=${PHP_XDEBUG_VERSION}
+RUN apk add --update --no-cache sudo git nano unzip openssh htop php7-xdebug=${PHP_XDEBUG_VERSION}
 
 COPY conf/xdebug.ini /etc/php7/conf.d/xdebug.ini
 COPY bin /usr/bin/
