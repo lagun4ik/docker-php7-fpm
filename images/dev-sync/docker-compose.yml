@@ -3,10 +3,9 @@ version: '3'
 services:
   php:
     image: lagun4ik/php7-fpm
-    working_dir: /var/www/application
     volumes:
       - ./application:/var/www/application
-      - vendors:/var/www/application/vendor
+      - vendor:/var/www/application/vendor
     depends_on:
       - composer
 
@@ -19,8 +18,8 @@ services:
       - VENDOR_DESTINATION=/var/www/application/vendor/
     volumes:
       - ./application:/var/www/application.full
-      - vendors:/var/www/application/vendor
+      - vendor:/var/www/application/vendor
       - $HOME/.composer:/root/.composer
 
 volumes:
-  vendors:
+  vendor:

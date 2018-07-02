@@ -26,7 +26,8 @@ ENV TERM=xterm \
 
 ARG PHP_XDEBUG_VERSION
 
-RUN apk add --update --no-cache sudo git nano unzip openssh htop php7-xdebug=${PHP_XDEBUG_VERSION}
+RUN apk add --update --no-cache sudo git nano unzip openssh htop php7-xdebug=${PHP_XDEBUG_VERSION} && \
+    echo "www-data ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 COPY conf/xdebug.ini /etc/php7/conf.d/xdebug.ini
 COPY bin /usr/bin/
@@ -42,7 +43,5 @@ RUN curl -OsSL https://phar.phpunit.de/phpunit.phar \
 RUN cd /usr/bin/ && chmod +x composer php phpunit
 
 USER www-data
-
-VOLUME ['/home/www-data/.composer']
 
 CMD ["/usr/sbin/php-fpm7", "-dzend_extension=xdebug.so"]
