@@ -56,7 +56,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 
-ARG PHP_VERSION=7.2.7-r0
+ARG PHP_VERSION=7.2.9-r0
 ARG PHP_MCRYPT_VERSION=1.0.1-r0
 ARG PHP_MONGODB_VERSION=1.4.4-r0
 ARG PHP_MEMCACHED_VERSION=3.0.4-r1
