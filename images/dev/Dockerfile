@@ -24,9 +24,9 @@ ENV TERM=xterm \
     PHP_XDEBUG_PROFILER_OUTPUT_DIR="/tmp" \
     PHP_XDEBUG_PROFILER_OUTPUT_NAME="cachegrind.out.%p"
 
-ARG PHP_XDEBUG_VERSION
+ARG PHP_XDEBUG_VERSION=2.6.1-r1
 
-RUN apk add --update --no-cache sudo git nano unzip openssh htop php7-xdebug=${PHP_XDEBUG_VERSION} && \
+RUN apk add --update --no-cache sudo git nano unzip openssh htop php7-pecl-xdebug=${PHP_XDEBUG_VERSION} && \
     echo "www-data ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 COPY conf/xdebug.ini /etc/php7/conf.d/xdebug.ini

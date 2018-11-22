@@ -52,27 +52,27 @@ RUN apk upgrade --update --no-cache && \
     curl \
     bash
 
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
-    echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
+    echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 
-ARG PHP_VERSION=7.2.9-r0
-ARG PHP_MCRYPT_VERSION=1.0.1-r0
-ARG PHP_MONGODB_VERSION=1.4.4-r0
-ARG PHP_MEMCACHED_VERSION=3.0.4-r1
-ARG PHP_REDIS_VERSION=4.0.2-r0
-ARG PHP_AMQP_VERSION=1.9.3-r1
-ARG PHP_IGBINARY_VERSION=2.0.6-r0
+ARG PHP_VERSION=7.2.12-r0
+ARG PHP_MCRYPT_VERSION=1.0.1-r1
+ARG PHP_MONGODB_VERSION=1.5.3-r2
+ARG PHP_MEMCACHED_VERSION=3.0.4-r2
+ARG PHP_REDIS_VERSION=4.2.0-r0
+ARG PHP_AMQP_VERSION=1.9.3-r2
+ARG PHP_IGBINARY_VERSION=2.0.8-r1
 
 RUN apk add --update --no-cache libmemcached rabbitmq-c libzip
 
 RUN apk add --update --no-cache \
-        php7-mcrypt=${PHP_MCRYPT_VERSION} \
-        php7-mongodb=${PHP_MONGODB_VERSION} \
-        php7-memcached=${PHP_MEMCACHED_VERSION} \
-        php7-redis=${PHP_REDIS_VERSION} \
-        php7-amqp=${PHP_AMQP_VERSION} \
-        php7-igbinary=${PHP_IGBINARY_VERSION} \
+        php7-pecl-igbinary=${PHP_IGBINARY_VERSION} \
+        php7-pecl-mcrypt=${PHP_MCRYPT_VERSION} \
+        php7-pecl-mongodb=${PHP_MONGODB_VERSION} \
+        php7-pecl-memcached=${PHP_MEMCACHED_VERSION} \
+        php7-pecl-redis=${PHP_REDIS_VERSION} \
+        php7-pecl-amqp=${PHP_AMQP_VERSION} \
         php7-common=${PHP_VERSION} \
         php7-bcmath=${PHP_VERSION} \
         php7-bz2=${PHP_VERSION} \
